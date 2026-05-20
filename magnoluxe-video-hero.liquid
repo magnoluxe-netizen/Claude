@@ -1,0 +1,193 @@
+<section
+  class="mglx-hero"
+  data-video-escritorio="{{ section.settings.video_escritorio | escape }}"
+  data-video-movil="{{ section.settings.video_movil | escape }}"
+>
+  <div class="mglx-hero__fondo">
+    <video
+      class="mglx-hero__video"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="none"
+    ></video>
+    <div
+      class="mglx-hero__overlay"
+      style="opacity:{{ section.settings.overlay_opacidad | divided_by: 100.0 }}"
+    ></div>
+  </div>
+
+  <div class="mglx-hero__contenido">
+    {% if section.settings.subtitulo != blank %}
+      <p class="mglx-hero__subtitulo">{{ section.settings.subtitulo }}</p>
+    {% endif %}
+    {% if section.settings.titulo != blank %}
+      <h2 class="mglx-hero__titulo">{{ section.settings.titulo }}</h2>
+    {% endif %}
+    {% if section.settings.boton_texto != blank %}
+      <a
+        class="mglx-hero__boton"
+        href="{{ section.settings.boton_url | default: '#' }}"
+      >{{ section.settings.boton_texto }}</a>
+    {% endif %}
+  </div>
+</section>
+
+{% stylesheet %}
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap');
+
+.mglx-hero{
+  position:relative;
+  width:100%;
+  height:100vh;
+  height:100svh;
+  overflow:hidden;
+  background:#000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.mglx-hero__fondo{
+  position:absolute;
+  inset:0;
+}
+.mglx-hero__video{
+  position:absolute;
+  top:-1px;left:-1px;
+  width:calc(100% + 2px);
+  height:calc(100% + 2px);
+  object-fit:cover;
+}
+.mglx-hero__overlay{
+  position:absolute;
+  inset:0;
+  background:#000;
+}
+.mglx-hero__contenido{
+  position:relative;
+  z-index:2;
+  text-align:center;
+  padding:0 clamp(24px,5vw,80px);
+  max-width:1000px;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:clamp(16px,3vh,32px);
+}
+.mglx-hero__subtitulo{
+  font-family:'Cinzel','Times New Roman',serif;
+  font-size:clamp(8px,1vw,11px);
+  font-weight:400;
+  letter-spacing:.6em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.55);
+  text-indent:.6em;
+  margin:0;
+}
+.mglx-hero__titulo{
+  font-family:'Cinzel','Times New Roman',serif;
+  font-size:clamp(34px,8vw,100px);
+  font-weight:900;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  color:#fff;
+  line-height:1;
+  text-indent:.25em;
+  margin:0;
+}
+.mglx-hero__boton{
+  display:inline-block;
+  font-family:'Cinzel','Times New Roman',serif;
+  font-size:clamp(9px,1vw,11px);
+  font-weight:700;
+  letter-spacing:.55em;
+  text-transform:uppercase;
+  color:#fff;
+  border:1px solid rgba(255,255,255,.7);
+  padding:clamp(14px,2vh,20px) clamp(32px,4vw,64px);
+  text-decoration:none;
+  text-indent:.55em;
+  border-radius:0;
+  transition:background .25s,color .25s,border-color .25s;
+}
+.mglx-hero__boton:hover{
+  background:#fff;
+  color:#000;
+  border-color:#fff;
+}
+{% endstylesheet %}
+
+{% javascript %}
+(function(){
+  document.querySelectorAll('.mglx-hero').forEach(function(s){
+    var video = s.querySelector('.mglx-hero__video');
+    if(!video) return;
+    var srcEsc = s.dataset.videoEscritorio || '';
+    var srcMov = s.dataset.videoMovil || '';
+    var src = (window.innerWidth < 990 && srcMov) ? srcMov : (srcEsc || srcMov);
+    if(!src) return;
+    video.src = src;
+    video.load();
+    var p = video.play();
+    if(p && p.catch) p.catch(function(){});
+  });
+})();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Video Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "video_escritorio",
+      "label": "Video Desktop (URL CDN)"
+    },
+    {
+      "type": "text",
+      "id": "video_movil",
+      "label": "Video Mobile (URL CDN)"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacidad",
+      "label": "Opacidad del Overlay",
+      "min": 0,
+      "max": 90,
+      "step": 10,
+      "default": 40,
+      "unit": "%"
+    },
+    {
+      "type": "text",
+      "id": "subtitulo",
+      "label": "Subtítulo",
+      "default": "Drop 01"
+    },
+    {
+      "type": "text",
+      "id": "titulo",
+      "label": "Título Principal",
+      "default": "MAGNOLUXE"
+    },
+    {
+      "type": "text",
+      "id": "boton_texto",
+      "label": "Texto del Botón",
+      "default": "Explorar"
+    },
+    {
+      "type": "url",
+      "id": "boton_url",
+      "label": "Enlace del Botón"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video Hero"
+    }
+  ]
+}
+{% endschema %}
