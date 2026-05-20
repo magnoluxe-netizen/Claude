@@ -18,6 +18,10 @@
     ></div>
   </div>
 
+  <div class="mglx-hero__lateral" aria-hidden="true">
+    <p>Drop 01 // Mayo 22 // Bucaramanga — Medellín</p>
+  </div>
+
   <div class="mglx-hero__contenido">
     {% if section.settings.subtitulo != blank %}
       <p class="mglx-hero__subtitulo">{{ section.settings.subtitulo }}</p>
@@ -48,10 +52,34 @@
   align-items:center;
   justify-content:center;
 }
+
+.mglx-hero::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  z-index:5;
+  pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23f)'/%3E%3C/svg%3E");
+  background-repeat:repeat;
+  background-size:200px 200px;
+  opacity:.07;
+  animation:mglxGrano .18s steps(1) infinite;
+}
+
+@keyframes mglxGrano{
+  0%  {background-position:0 0}
+  20% {background-position:-44px 17px}
+  40% {background-position:23px -39px}
+  60% {background-position:-19px 47px}
+  80% {background-position:41px -13px}
+}
+
 .mglx-hero__fondo{
   position:absolute;
   inset:0;
+  z-index:0;
 }
+
 .mglx-hero__video{
   position:absolute;
   top:-1px;left:-1px;
@@ -59,44 +87,77 @@
   height:calc(100% + 2px);
   object-fit:cover;
 }
+
 .mglx-hero__overlay{
   position:absolute;
   inset:0;
   background:#000;
 }
+
+.mglx-hero__lateral{
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  z-index:3;
+  width:40px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none;
+}
+
+.mglx-hero__lateral p{
+  margin:0;
+  writing-mode:vertical-rl;
+  transform:rotate(180deg);
+  font-family:system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
+  font-size:8px;
+  font-weight:400;
+  letter-spacing:.4em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.4);
+  white-space:nowrap;
+}
+
 .mglx-hero__contenido{
   position:relative;
   z-index:2;
   text-align:center;
-  padding:0 clamp(24px,5vw,80px);
-  max-width:1000px;
+  padding:0 clamp(56px,9vw,140px);
+  max-width:1100px;
   width:100%;
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:clamp(16px,3vh,32px);
+  gap:clamp(18px,3.5vh,38px);
 }
+
 .mglx-hero__subtitulo{
   font-family:'Cinzel','Times New Roman',serif;
-  font-size:clamp(8px,1vw,11px);
+  font-size:clamp(9px,1vw,12px);
   font-weight:400;
-  letter-spacing:.6em;
+  letter-spacing:.4em;
   text-transform:uppercase;
-  color:rgba(255,255,255,.55);
-  text-indent:.6em;
+  color:rgba(255,255,255,.85);
+  text-indent:.4em;
   margin:0;
+  max-width:580px;
+  line-height:1.9;
 }
+
 .mglx-hero__titulo{
   font-family:'Cinzel','Times New Roman',serif;
-  font-size:clamp(34px,8vw,100px);
+  font-size:clamp(36px,9vw,110px);
   font-weight:900;
-  letter-spacing:.25em;
+  letter-spacing:.3em;
   text-transform:uppercase;
   color:#fff;
   line-height:1;
-  text-indent:.25em;
+  text-indent:.3em;
   margin:0;
 }
+
 .mglx-hero__boton{
   display:inline-block;
   font-family:'Cinzel','Times New Roman',serif;
@@ -105,17 +166,23 @@
   letter-spacing:.55em;
   text-transform:uppercase;
   color:#fff;
-  border:1px solid rgba(255,255,255,.7);
-  padding:clamp(14px,2vh,20px) clamp(32px,4vw,64px);
+  background:transparent;
+  border:1px solid #fff;
+  padding:clamp(14px,2vh,20px) clamp(36px,5vw,72px);
   text-decoration:none;
   text-indent:.55em;
   border-radius:0;
-  transition:background .25s,color .25s,border-color .25s;
+  transition:background .12s,color .12s;
 }
+
 .mglx-hero__boton:hover{
   background:#fff;
   color:#000;
-  border-color:#fff;
+}
+
+@media(max-width:749px){
+  .mglx-hero__lateral{display:none;}
+  .mglx-hero__contenido{padding:0 clamp(24px,6vw,40px);}
 }
 {% endstylesheet %}
 
@@ -157,14 +224,14 @@
       "min": 0,
       "max": 90,
       "step": 10,
-      "default": 40,
+      "default": 50,
       "unit": "%"
     },
     {
       "type": "text",
       "id": "subtitulo",
-      "label": "Subtítulo",
-      "default": "Drop 01"
+      "label": "Subtítulo / Aviso",
+      "default": "Advertencia: copias limitadas a 10 unidades por diseño. Ninguna reedición."
     },
     {
       "type": "text",
@@ -176,7 +243,7 @@
       "type": "text",
       "id": "boton_texto",
       "label": "Texto del Botón",
-      "default": "Explorar"
+      "default": "Descubrir"
     },
     {
       "type": "url",
