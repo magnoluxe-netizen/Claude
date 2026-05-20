@@ -40,24 +40,18 @@
         {% endif %}
 
         <div class="mglx-versus__specs">
-          {% if section.settings.peso_a != blank %}
-            <div class="mglx-versus__spec-fila">
-              <span class="mglx-versus__spec-label">Peso</span>
-              <span class="mglx-versus__spec-valor">{{ section.settings.peso_a }}</span>
-            </div>
-          {% endif %}
-          {% if section.settings.silueta_a != blank %}
-            <div class="mglx-versus__spec-fila">
-              <span class="mglx-versus__spec-label">Silueta</span>
-              <span class="mglx-versus__spec-valor">{{ section.settings.silueta_a }}</span>
-            </div>
-          {% endif %}
-          {% if section.settings.confeccion_a != blank %}
-            <div class="mglx-versus__spec-fila">
-              <span class="mglx-versus__spec-label">Confección</span>
-              <span class="mglx-versus__spec-valor">{{ section.settings.confeccion_a }}</span>
-            </div>
-          {% endif %}
+          <div class="mglx-versus__spec-fila">
+            <span class="mglx-versus__spec-label">Peso</span>
+            <span class="mglx-versus__spec-valor">320 gramos // Algodón Premium de Alto Gramaje</span>
+          </div>
+          <div class="mglx-versus__spec-fila">
+            <span class="mglx-versus__spec-label">Silueta</span>
+            <span class="mglx-versus__spec-valor">Oversized Fit // Patrón de Autor</span>
+          </div>
+          <div class="mglx-versus__spec-fila">
+            <span class="mglx-versus__spec-label">Detalles</span>
+            <span class="mglx-versus__spec-valor">Cuello grueso, bordes afilados y acabados de alta costura</span>
+          </div>
         </div>
 
         {% form 'product', prod_a %}
@@ -126,24 +120,18 @@
         {% endif %}
 
         <div class="mglx-versus__specs">
-          {% if section.settings.peso_b != blank %}
-            <div class="mglx-versus__spec-fila">
-              <span class="mglx-versus__spec-label">Peso</span>
-              <span class="mglx-versus__spec-valor">{{ section.settings.peso_b }}</span>
-            </div>
-          {% endif %}
-          {% if section.settings.silueta_b != blank %}
-            <div class="mglx-versus__spec-fila">
-              <span class="mglx-versus__spec-label">Silueta</span>
-              <span class="mglx-versus__spec-valor">{{ section.settings.silueta_b }}</span>
-            </div>
-          {% endif %}
-          {% if section.settings.confeccion_b != blank %}
-            <div class="mglx-versus__spec-fila">
-              <span class="mglx-versus__spec-label">Confección</span>
-              <span class="mglx-versus__spec-valor">{{ section.settings.confeccion_b }}</span>
-            </div>
-          {% endif %}
+          <div class="mglx-versus__spec-fila">
+            <span class="mglx-versus__spec-label">Peso</span>
+            <span class="mglx-versus__spec-valor">320 gramos // Algodón Premium de Alto Gramaje</span>
+          </div>
+          <div class="mglx-versus__spec-fila">
+            <span class="mglx-versus__spec-label">Silueta</span>
+            <span class="mglx-versus__spec-valor">Oversized Fit // Patrón de Autor</span>
+          </div>
+          <div class="mglx-versus__spec-fila">
+            <span class="mglx-versus__spec-label">Detalles</span>
+            <span class="mglx-versus__spec-valor">Cuello grueso, bordes afilados y acabados de alta costura</span>
+          </div>
         </div>
 
         {% form 'product', prod_b %}
@@ -166,7 +154,7 @@
             <input type="hidden" name="id" value="{{ prod_b.variants.first.id }}">
           {% endunless %}
           <button type="submit" class="mglx-versus__boton-compra">
-            {{ section.settings.boton_b | default: 'Ver Detalles' }}
+            {{ section.settings.boton_b | default: 'Adquirir Armadura' }}
           </button>
         {% endform %}
 
@@ -490,26 +478,8 @@
     {
       "type": "textarea",
       "id": "mistica_a",
-      "label": "Mística / Concepto",
+      "label": "Mística / Historia",
       "default": "Construida para quienes entienden que la ropa no es decoración sino declaración. Cada costura es una cicatriz deliberada."
-    },
-    {
-      "type": "text",
-      "id": "peso_a",
-      "label": "Peso / Material",
-      "default": "320 gramos // Algodón de Alto Gramaje"
-    },
-    {
-      "type": "text",
-      "id": "silueta_a",
-      "label": "Silueta",
-      "default": "Oversized Fit // Silueta de Autor"
-    },
-    {
-      "type": "text",
-      "id": "confeccion_a",
-      "label": "Confección",
-      "default": "Acabados Premium de Alta Costura"
     },
     {
       "type": "text",
@@ -535,26 +505,8 @@
     {
       "type": "textarea",
       "id": "mistica_b",
-      "label": "Mística / Concepto",
+      "label": "Mística / Historia",
       "default": "Para los que guardan silencio pero hablan con presencia. Un corte que convierte el cuerpo en santuario."
-    },
-    {
-      "type": "text",
-      "id": "peso_b",
-      "label": "Peso / Material",
-      "default": "320 gramos // Algodón de Alto Gramaje"
-    },
-    {
-      "type": "text",
-      "id": "silueta_b",
-      "label": "Silueta",
-      "default": "Oversized Fit // Silueta de Autor"
-    },
-    {
-      "type": "text",
-      "id": "confeccion_b",
-      "label": "Confección",
-      "default": "Acabados Premium de Alta Costura"
     },
     {
       "type": "text",
