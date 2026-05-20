@@ -1,0 +1,349 @@
+<section class="mglx-versus">
+  <div class="mglx-versus__contenedor">
+
+    <div class="mglx-versus__panel mglx-versus__panel--izquierda">
+      <div class="mglx-versus__cabecera">
+        {% if section.settings.etiqueta_izquierda != blank %}
+          <span class="mglx-versus__etiqueta">{{ section.settings.etiqueta_izquierda }}</span>
+        {% endif %}
+        {% if section.settings.titulo_izquierda != blank %}
+          <h2 class="mglx-versus__titulo">{{ section.settings.titulo_izquierda }}</h2>
+        {% endif %}
+      </div>
+
+      <div class="mglx-versus__zona-imagen{% if section.settings.imagen_izquierda == blank %} mglx-versus__zona-imagen--vacia{% endif %}">
+        {% if section.settings.imagen_izquierda != blank %}
+          <img
+            src="{{ section.settings.imagen_izquierda | image_url: width: 900 }}"
+            srcset="{{ section.settings.imagen_izquierda | image_url: width: 450 }} 450w, {{ section.settings.imagen_izquierda | image_url: width: 900 }} 900w, {{ section.settings.imagen_izquierda | image_url: width: 1400 }} 1400w"
+            sizes="(max-width:989px) 100vw, 50vw"
+            alt="{{ section.settings.titulo_izquierda | escape }}"
+            loading="lazy"
+            class="mglx-versus__imagen"
+          >
+        {% endif %}
+      </div>
+
+      <div class="mglx-versus__cuerpo">
+        {% if section.settings.mistica_izquierda != blank %}
+          <div class="mglx-versus__bloque">
+            <span class="mglx-versus__bloque-label">Mística</span>
+            <p class="mglx-versus__mistica">{{ section.settings.mistica_izquierda }}</p>
+          </div>
+        {% endif %}
+        {% if section.settings.specs_izquierda != blank %}
+          <div class="mglx-versus__bloque">
+            <span class="mglx-versus__bloque-label">Especificaciones</span>
+            <p class="mglx-versus__specs">{{ section.settings.specs_izquierda | newline_to_br }}</p>
+          </div>
+        {% endif %}
+        {% if section.settings.boton_texto_izquierda != blank %}
+          <a
+            class="mglx-versus__boton"
+            href="{{ section.settings.boton_url_izquierda | default: '#' }}"
+          >{{ section.settings.boton_texto_izquierda }}</a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="mglx-versus__panel mglx-versus__panel--derecha">
+      <div class="mglx-versus__cabecera">
+        {% if section.settings.etiqueta_derecha != blank %}
+          <span class="mglx-versus__etiqueta">{{ section.settings.etiqueta_derecha }}</span>
+        {% endif %}
+        {% if section.settings.titulo_derecha != blank %}
+          <h2 class="mglx-versus__titulo">{{ section.settings.titulo_derecha }}</h2>
+        {% endif %}
+      </div>
+
+      <div class="mglx-versus__zona-imagen{% if section.settings.imagen_derecha == blank %} mglx-versus__zona-imagen--vacia{% endif %}">
+        {% if section.settings.imagen_derecha != blank %}
+          <img
+            src="{{ section.settings.imagen_derecha | image_url: width: 900 }}"
+            srcset="{{ section.settings.imagen_derecha | image_url: width: 450 }} 450w, {{ section.settings.imagen_derecha | image_url: width: 900 }} 900w, {{ section.settings.imagen_derecha | image_url: width: 1400 }} 1400w"
+            sizes="(max-width:989px) 100vw, 50vw"
+            alt="{{ section.settings.titulo_derecha | escape }}"
+            loading="lazy"
+            class="mglx-versus__imagen"
+          >
+        {% endif %}
+      </div>
+
+      <div class="mglx-versus__cuerpo">
+        {% if section.settings.mistica_derecha != blank %}
+          <div class="mglx-versus__bloque">
+            <span class="mglx-versus__bloque-label">Mística</span>
+            <p class="mglx-versus__mistica">{{ section.settings.mistica_derecha }}</p>
+          </div>
+        {% endif %}
+        {% if section.settings.specs_derecha != blank %}
+          <div class="mglx-versus__bloque">
+            <span class="mglx-versus__bloque-label">Especificaciones</span>
+            <p class="mglx-versus__specs">{{ section.settings.specs_derecha | newline_to_br }}</p>
+          </div>
+        {% endif %}
+        {% if section.settings.boton_texto_derecha != blank %}
+          <a
+            class="mglx-versus__boton"
+            href="{{ section.settings.boton_url_derecha | default: '#' }}"
+          >{{ section.settings.boton_texto_derecha }}</a>
+        {% endif %}
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% stylesheet %}
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap');
+
+.mglx-versus{
+  background:#000;
+  width:100%;
+}
+
+.mglx-versus__contenedor{
+  display:flex;
+  flex-direction:column;
+}
+
+.mglx-versus__panel{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  gap:clamp(28px,4.5vh,52px);
+  padding:clamp(40px,6vw,88px) clamp(28px,4vw,68px);
+  background:#000;
+}
+
+.mglx-versus__panel--izquierda{
+  border-bottom:1px solid rgba(255,255,255,.3);
+}
+
+.mglx-versus__cabecera{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.mglx-versus__etiqueta{
+  font-family:system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
+  font-size:clamp(8px,.85vw,10px);
+  font-weight:400;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.4);
+  text-indent:.3em;
+}
+
+.mglx-versus__titulo{
+  font-family:'Cinzel','Times New Roman',serif;
+  font-size:clamp(30px,4.5vw,58px);
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:#fff;
+  line-height:1.05;
+  margin:0;
+}
+
+.mglx-versus__zona-imagen{
+  aspect-ratio:2/3;
+  overflow:hidden;
+  background:#0a0a0a;
+}
+
+.mglx-versus__zona-imagen--vacia{
+  background:#0d0d0d;
+}
+
+.mglx-versus__imagen{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.mglx-versus__cuerpo{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+}
+
+.mglx-versus__bloque{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  padding:clamp(20px,3vh,32px) 0;
+  border-top:1px solid rgba(255,255,255,.1);
+}
+
+.mglx-versus__bloque:first-child{
+  border-top:none;
+  padding-top:0;
+}
+
+.mglx-versus__bloque-label{
+  font-family:system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
+  font-size:8px;
+  font-weight:400;
+  letter-spacing:.45em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.32);
+  text-indent:.45em;
+}
+
+.mglx-versus__mistica{
+  font-family:'Cinzel','Times New Roman',serif;
+  font-size:clamp(13px,1.15vw,15px);
+  font-weight:400;
+  line-height:1.9;
+  color:rgba(255,255,255,.82);
+  margin:0;
+}
+
+.mglx-versus__specs{
+  font-family:system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
+  font-size:clamp(10px,.9vw,12px);
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.4);
+  line-height:2;
+  margin:0;
+}
+
+.mglx-versus__boton{
+  display:inline-block;
+  font-family:'Cinzel','Times New Roman',serif;
+  font-size:clamp(8px,.85vw,10px);
+  font-weight:700;
+  letter-spacing:.5em;
+  text-transform:uppercase;
+  color:#fff;
+  background:transparent;
+  border:1px solid #fff;
+  padding:clamp(14px,1.8vh,18px) clamp(24px,3vw,44px);
+  text-decoration:none;
+  text-indent:.5em;
+  border-radius:0;
+  transition:background .12s,color .12s;
+  margin-top:clamp(8px,1.5vh,16px);
+}
+
+.mglx-versus__boton:hover{
+  background:#fff;
+  color:#000;
+}
+
+@media(min-width:990px){
+  .mglx-versus__contenedor{
+    flex-direction:row;
+    min-height:100svh;
+  }
+  .mglx-versus__panel--izquierda{
+    border-bottom:none;
+    border-right:1px solid rgba(255,255,255,.3);
+  }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Versus — Comparativa",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Lado Izquierdo"
+    },
+    {
+      "type": "text",
+      "id": "etiqueta_izquierda",
+      "label": "Etiqueta",
+      "default": "ARCHETYPO 01"
+    },
+    {
+      "type": "image_picker",
+      "id": "imagen_izquierda",
+      "label": "Imagen"
+    },
+    {
+      "type": "text",
+      "id": "titulo_izquierda",
+      "label": "Título de la Prenda",
+      "default": "La Armadura"
+    },
+    {
+      "type": "textarea",
+      "id": "mistica_izquierda",
+      "label": "Mística / Significado",
+      "default": "Construida para quienes entienden que la ropa no es decoración sino declaración. Cada costura es una cicatriz deliberada."
+    },
+    {
+      "type": "textarea",
+      "id": "specs_izquierda",
+      "label": "Especificaciones",
+      "default": "Cotton French Terry 450GSM\nOversized Fit\nDrop Shoulder\n100% Pre-washed"
+    },
+    {
+      "type": "text",
+      "id": "boton_texto_izquierda",
+      "label": "Texto del Botón",
+      "default": "Elegir Armadura"
+    },
+    {
+      "type": "url",
+      "id": "boton_url_izquierda",
+      "label": "Enlace del Botón"
+    },
+    {
+      "type": "header",
+      "content": "Lado Derecho"
+    },
+    {
+      "type": "text",
+      "id": "etiqueta_derecha",
+      "label": "Etiqueta",
+      "default": "ARCHETYPO 02"
+    },
+    {
+      "type": "image_picker",
+      "id": "imagen_derecha",
+      "label": "Imagen"
+    },
+    {
+      "type": "text",
+      "id": "titulo_derecha",
+      "label": "Título de la Prenda",
+      "default": "El Relicario"
+    },
+    {
+      "type": "textarea",
+      "id": "mistica_derecha",
+      "label": "Mística / Significado",
+      "default": "Para los que guardan silencio pero hablan con presencia. Un corte que convierte el cuerpo en santuario."
+    },
+    {
+      "type": "textarea",
+      "id": "specs_derecha",
+      "label": "Especificaciones",
+      "default": "Heavyweight Cotton Fleece 380GSM\nRegular Fit\nRibbed Cuffs\n100% Pre-washed"
+    },
+    {
+      "type": "text",
+      "id": "boton_texto_derecha",
+      "label": "Texto del Botón",
+      "default": "Ver Detalles"
+    },
+    {
+      "type": "url",
+      "id": "boton_url_derecha",
+      "label": "Enlace del Botón"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Versus — Comparativa"
+    }
+  ]
+}
+{% endschema %}
