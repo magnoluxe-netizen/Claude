@@ -1,168 +1,123 @@
 {%- assign prod_a = section.settings.producto_a -%}
 {%- assign prod_b = section.settings.producto_b -%}
-{%- assign esquema = section.settings.color_scheme | default: 'dark' -%}
 
-<section class="mglx-versus mglx-versus--{{ esquema }}">
+<section class="mglx-versus">
   <div class="mglx-versus__contenedor">
 
     <div class="mglx-versus__panel mglx-versus__panel--izquierda">
-      {% if prod_a %}
-        <div class="mglx-versus__cabecera">
-          {% if section.settings.etiqueta_a != blank %}
-            <span class="mglx-versus__etiqueta">{{ section.settings.etiqueta_a }}</span>
-          {% endif %}
-          <div class="mglx-versus__titulo-fila">
-            <h2 class="mglx-versus__titulo">{{ prod_a.title }}</h2>
-            <span class="mglx-versus__precio">{{ prod_a.price | money }}</span>
-          </div>
-        </div>
-
-        {% if prod_a.featured_image %}
-          <div class="mglx-versus__zona-imagen">
-            <img
-              src="{{ prod_a.featured_image | image_url: width: 900 }}"
-              srcset="{{ prod_a.featured_image | image_url: width: 450 }} 450w, {{ prod_a.featured_image | image_url: width: 900 }} 900w, {{ prod_a.featured_image | image_url: width: 1400 }} 1400w"
-              sizes="(max-width:989px) 100vw, 50vw"
-              width="{{ prod_a.featured_image.width }}"
-              height="{{ prod_a.featured_image.height }}"
-              alt="{{ prod_a.featured_image.alt | default: prod_a.title | escape }}"
-              loading="lazy"
-              class="mglx-versus__imagen"
-            >
-          </div>
+      <div class="mglx-versus__cabecera">
+        {% if section.settings.etiqueta_izquierda != blank %}
+          <span class="mglx-versus__etiqueta">{{ section.settings.etiqueta_izquierda }}</span>
         {% endif %}
+        {% if prod_a %}
+          <h2 class="mglx-versus__titulo">{{ prod_a.title }}</h2>
+        {% endif %}
+      </div>
 
-        {% if section.settings.mistica_a != blank %}
+      <div class="mglx-versus__zona-imagen{% if section.settings.imagen_izquierda == blank %} mglx-versus__zona-imagen--vacia{% endif %}">
+        {% if section.settings.imagen_izquierda != blank %}
+          <img
+            src="{{ section.settings.imagen_izquierda | image_url: width: 900 }}"
+            srcset="{{ section.settings.imagen_izquierda | image_url: width: 450 }} 450w, {{ section.settings.imagen_izquierda | image_url: width: 900 }} 900w, {{ section.settings.imagen_izquierda | image_url: width: 1400 }} 1400w"
+            sizes="(max-width:989px) 100vw, 50vw"
+            width="{{ section.settings.imagen_izquierda.width }}"
+            height="{{ section.settings.imagen_izquierda.height }}"
+            alt="{{ section.settings.imagen_izquierda.alt | default: section.settings.etiqueta_izquierda | escape }}"
+            loading="lazy"
+            class="mglx-versus__imagen"
+          >
+        {% endif %}
+      </div>
+
+      <div class="mglx-versus__cuerpo">
+        {% if section.settings.mistica_izquierda != blank %}
           <div class="mglx-versus__bloque">
             <span class="mglx-versus__bloque-label">Mística</span>
-            <p class="mglx-versus__mistica">{{ section.settings.mistica_a }}</p>
+            <p class="mglx-versus__mistica">{{ section.settings.mistica_izquierda }}</p>
           </div>
         {% endif %}
 
-        <div class="mglx-versus__specs">
-          <div class="mglx-versus__spec-fila">
-            <span class="mglx-versus__spec-label">Peso</span>
-            <span class="mglx-versus__spec-valor">320 gramos // Algodón Premium de Alto Gramaje</span>
-          </div>
-          <div class="mglx-versus__spec-fila">
-            <span class="mglx-versus__spec-label">Silueta</span>
-            <span class="mglx-versus__spec-valor">Oversized Fit // Patrón de Autor</span>
-          </div>
-          <div class="mglx-versus__spec-fila">
-            <span class="mglx-versus__spec-label">Detalles</span>
-            <span class="mglx-versus__spec-valor">Cuello grueso, bordes afilados y acabados de alta costura</span>
-          </div>
-        </div>
-
-        {% form 'product', prod_a %}
-          {% unless prod_a.has_only_default_variant %}
-            <div class="mglx-versus__tallas">
-              {% for variant in prod_a.variants %}
-                <label class="mglx-versus__talla{% unless variant.available %} mglx-versus__talla--agotada{% endunless %}">
-                  <input
-                    type="radio"
-                    name="id"
-                    value="{{ variant.id }}"
-                    {% if forloop.first %}checked{% endif %}
-                    {% unless variant.available %}disabled{% endunless %}
-                  >
-                  <span>{{ variant.title }}</span>
-                </label>
-              {% endfor %}
+        <div class="mglx-versus__bloque">
+          <span class="mglx-versus__bloque-label">Especificaciones</span>
+          <div class="mglx-versus__specs">
+            <div class="mglx-versus__spec-fila">
+              <span class="mglx-versus__spec-label">Peso</span>
+              <span class="mglx-versus__spec-valor">320 gramos // Algodón Premium de Alto Gramaje</span>
             </div>
-          {% else %}
-            <input type="hidden" name="id" value="{{ prod_a.variants.first.id }}">
-          {% endunless %}
-          <button type="submit" class="mglx-versus__boton-compra">
-            {{ section.settings.boton_a | default: 'Adquirir Armadura' }}
-          </button>
-        {% endform %}
-
-      {% else %}
-        <div class="mglx-versus__vacio">
-          <p class="mglx-versus__vacio-texto">Selecciona el Producto A en el editor</p>
+            <div class="mglx-versus__spec-fila">
+              <span class="mglx-versus__spec-label">Silueta</span>
+              <span class="mglx-versus__spec-valor">Oversized Fit // Patrón de Autor</span>
+            </div>
+            <div class="mglx-versus__spec-fila">
+              <span class="mglx-versus__spec-label">Confección</span>
+              <span class="mglx-versus__spec-valor">Cuello grueso anti-deformación y bordes de alta costura</span>
+            </div>
+          </div>
         </div>
-      {% endif %}
+
+        <a
+          class="mglx-versus__boton"
+          href="{% if prod_a %}{{ prod_a.url }}{% else %}#{% endif %}"
+        >{{ section.settings.boton_texto_izquierda | default: 'Elegir Armadura' }}</a>
+      </div>
     </div>
 
     <div class="mglx-versus__panel mglx-versus__panel--derecha">
-      {% if prod_b %}
-        <div class="mglx-versus__cabecera">
-          {% if section.settings.etiqueta_b != blank %}
-            <span class="mglx-versus__etiqueta">{{ section.settings.etiqueta_b }}</span>
-          {% endif %}
-          <div class="mglx-versus__titulo-fila">
-            <h2 class="mglx-versus__titulo">{{ prod_b.title }}</h2>
-            <span class="mglx-versus__precio">{{ prod_b.price | money }}</span>
-          </div>
-        </div>
-
-        {% if prod_b.featured_image %}
-          <div class="mglx-versus__zona-imagen">
-            <img
-              src="{{ prod_b.featured_image | image_url: width: 900 }}"
-              srcset="{{ prod_b.featured_image | image_url: width: 450 }} 450w, {{ prod_b.featured_image | image_url: width: 900 }} 900w, {{ prod_b.featured_image | image_url: width: 1400 }} 1400w"
-              sizes="(max-width:989px) 100vw, 50vw"
-              width="{{ prod_b.featured_image.width }}"
-              height="{{ prod_b.featured_image.height }}"
-              alt="{{ prod_b.featured_image.alt | default: prod_b.title | escape }}"
-              loading="lazy"
-              class="mglx-versus__imagen"
-            >
-          </div>
+      <div class="mglx-versus__cabecera">
+        {% if section.settings.etiqueta_derecha != blank %}
+          <span class="mglx-versus__etiqueta">{{ section.settings.etiqueta_derecha }}</span>
         {% endif %}
+        {% if prod_b %}
+          <h2 class="mglx-versus__titulo">{{ prod_b.title }}</h2>
+        {% endif %}
+      </div>
 
-        {% if section.settings.mistica_b != blank %}
+      <div class="mglx-versus__zona-imagen{% if section.settings.imagen_derecha == blank %} mglx-versus__zona-imagen--vacia{% endif %}">
+        {% if section.settings.imagen_derecha != blank %}
+          <img
+            src="{{ section.settings.imagen_derecha | image_url: width: 900 }}"
+            srcset="{{ section.settings.imagen_derecha | image_url: width: 450 }} 450w, {{ section.settings.imagen_derecha | image_url: width: 900 }} 900w, {{ section.settings.imagen_derecha | image_url: width: 1400 }} 1400w"
+            sizes="(max-width:989px) 100vw, 50vw"
+            width="{{ section.settings.imagen_derecha.width }}"
+            height="{{ section.settings.imagen_derecha.height }}"
+            alt="{{ section.settings.imagen_derecha.alt | default: section.settings.etiqueta_derecha | escape }}"
+            loading="lazy"
+            class="mglx-versus__imagen"
+          >
+        {% endif %}
+      </div>
+
+      <div class="mglx-versus__cuerpo">
+        {% if section.settings.mistica_derecha != blank %}
           <div class="mglx-versus__bloque">
             <span class="mglx-versus__bloque-label">Mística</span>
-            <p class="mglx-versus__mistica">{{ section.settings.mistica_b }}</p>
+            <p class="mglx-versus__mistica">{{ section.settings.mistica_derecha }}</p>
           </div>
         {% endif %}
 
-        <div class="mglx-versus__specs">
-          <div class="mglx-versus__spec-fila">
-            <span class="mglx-versus__spec-label">Peso</span>
-            <span class="mglx-versus__spec-valor">320 gramos // Algodón Premium de Alto Gramaje</span>
-          </div>
-          <div class="mglx-versus__spec-fila">
-            <span class="mglx-versus__spec-label">Silueta</span>
-            <span class="mglx-versus__spec-valor">Oversized Fit // Patrón de Autor</span>
-          </div>
-          <div class="mglx-versus__spec-fila">
-            <span class="mglx-versus__spec-label">Detalles</span>
-            <span class="mglx-versus__spec-valor">Cuello grueso, bordes afilados y acabados de alta costura</span>
-          </div>
-        </div>
-
-        {% form 'product', prod_b %}
-          {% unless prod_b.has_only_default_variant %}
-            <div class="mglx-versus__tallas">
-              {% for variant in prod_b.variants %}
-                <label class="mglx-versus__talla{% unless variant.available %} mglx-versus__talla--agotada{% endunless %}">
-                  <input
-                    type="radio"
-                    name="id"
-                    value="{{ variant.id }}"
-                    {% if forloop.first %}checked{% endif %}
-                    {% unless variant.available %}disabled{% endunless %}
-                  >
-                  <span>{{ variant.title }}</span>
-                </label>
-              {% endfor %}
+        <div class="mglx-versus__bloque">
+          <span class="mglx-versus__bloque-label">Especificaciones</span>
+          <div class="mglx-versus__specs">
+            <div class="mglx-versus__spec-fila">
+              <span class="mglx-versus__spec-label">Peso</span>
+              <span class="mglx-versus__spec-valor">320 gramos // Algodón Premium de Alto Gramaje</span>
             </div>
-          {% else %}
-            <input type="hidden" name="id" value="{{ prod_b.variants.first.id }}">
-          {% endunless %}
-          <button type="submit" class="mglx-versus__boton-compra">
-            {{ section.settings.boton_b | default: 'Adquirir Armadura' }}
-          </button>
-        {% endform %}
-
-      {% else %}
-        <div class="mglx-versus__vacio">
-          <p class="mglx-versus__vacio-texto">Selecciona el Producto B en el editor</p>
+            <div class="mglx-versus__spec-fila">
+              <span class="mglx-versus__spec-label">Silueta</span>
+              <span class="mglx-versus__spec-valor">Oversized Fit // Patrón de Autor</span>
+            </div>
+            <div class="mglx-versus__spec-fila">
+              <span class="mglx-versus__spec-label">Confección</span>
+              <span class="mglx-versus__spec-valor">Cuello grueso anti-deformación y bordes de alta costura</span>
+            </div>
+          </div>
         </div>
-      {% endif %}
+
+        <a
+          class="mglx-versus__boton"
+          href="{% if prod_b %}{{ prod_b.url }}{% else %}#{% endif %}"
+        >{{ section.settings.boton_texto_derecha | default: 'Elegir Armadura' }}</a>
+      </div>
     </div>
 
   </div>
@@ -171,42 +126,8 @@
 {% stylesheet %}
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap');
 
-.mglx-versus--dark{
-  --vs-fondo:#000;
-  --vs-texto:#fff;
-  --vs-divisor:rgba(255,255,255,.25);
-  --vs-etiqueta:rgba(255,255,255,.38);
-  --vs-precio:rgba(255,255,255,.55);
-  --vs-mistica:rgba(255,255,255,.8);
-  --vs-bloque-borde:rgba(255,255,255,.1);
-  --vs-spec-label:rgba(255,255,255,.3);
-  --vs-spec-valor:rgba(255,255,255,.55);
-  --vs-talla-borde:rgba(255,255,255,.3);
-  --vs-boton-hover-fondo:#fff;
-  --vs-boton-hover-texto:#000;
-  --vs-vacio:rgba(255,255,255,.05);
-  --vs-placeholder:rgba(255,255,255,.2);
-}
-
-.mglx-versus--light{
-  --vs-fondo:#f4f4f4;
-  --vs-texto:#000;
-  --vs-divisor:rgba(0,0,0,.18);
-  --vs-etiqueta:rgba(0,0,0,.42);
-  --vs-precio:rgba(0,0,0,.55);
-  --vs-mistica:rgba(0,0,0,.78);
-  --vs-bloque-borde:rgba(0,0,0,.1);
-  --vs-spec-label:rgba(0,0,0,.35);
-  --vs-spec-valor:rgba(0,0,0,.6);
-  --vs-talla-borde:rgba(0,0,0,.28);
-  --vs-boton-hover-fondo:#000;
-  --vs-boton-hover-texto:#f4f4f4;
-  --vs-vacio:rgba(0,0,0,.04);
-  --vs-placeholder:rgba(0,0,0,.2);
-}
-
 .mglx-versus{
-  background:var(--vs-fondo);
+  background:#f4f4f4;
   width:100%;
 }
 
@@ -219,12 +140,12 @@
   flex:1;
   display:flex;
   flex-direction:column;
-  gap:clamp(24px,4vh,48px);
+  gap:clamp(28px,4.5vh,52px);
   padding:clamp(40px,6vw,88px) clamp(28px,4vw,68px);
 }
 
 .mglx-versus__panel--izquierda{
-  border-bottom:1px solid var(--vs-divisor);
+  border-bottom:1px solid rgba(0,0,0,.15);
 }
 
 .mglx-versus__cabecera{
@@ -239,42 +160,29 @@
   font-weight:400;
   letter-spacing:.3em;
   text-transform:uppercase;
-  color:var(--vs-etiqueta);
+  color:rgba(0,0,0,.4);
   text-indent:.3em;
-}
-
-.mglx-versus__titulo-fila{
-  display:flex;
-  align-items:baseline;
-  justify-content:space-between;
-  gap:16px;
 }
 
 .mglx-versus__titulo{
   font-family:'Cinzel','Times New Roman',serif;
-  font-size:clamp(26px,4vw,52px);
+  font-size:clamp(30px,4.5vw,58px);
   font-weight:900;
   letter-spacing:.08em;
   text-transform:uppercase;
-  color:var(--vs-texto);
+  color:#000;
   line-height:1.05;
   margin:0;
-}
-
-.mglx-versus__precio{
-  font-family:system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
-  font-size:clamp(14px,1.4vw,18px);
-  font-weight:300;
-  letter-spacing:.05em;
-  color:var(--vs-precio);
-  white-space:nowrap;
-  flex-shrink:0;
 }
 
 .mglx-versus__zona-imagen{
   aspect-ratio:2/3;
   overflow:hidden;
-  background:var(--vs-vacio);
+  background:#e8e8e8;
+}
+
+.mglx-versus__zona-imagen--vacia{
+  background:#ebebeb;
 }
 
 .mglx-versus__imagen{
@@ -284,10 +192,23 @@
   display:block;
 }
 
+.mglx-versus__cuerpo{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+}
+
 .mglx-versus__bloque{
   display:flex;
   flex-direction:column;
   gap:12px;
+  padding:clamp(20px,3vh,32px) 0;
+  border-top:1px solid rgba(0,0,0,.1);
+}
+
+.mglx-versus__bloque:first-child{
+  border-top:none;
+  padding-top:0;
 }
 
 .mglx-versus__bloque-label{
@@ -296,16 +217,16 @@
   font-weight:400;
   letter-spacing:.45em;
   text-transform:uppercase;
-  color:var(--vs-spec-label);
+  color:rgba(0,0,0,.32);
   text-indent:.45em;
 }
 
 .mglx-versus__mistica{
   font-family:'Cinzel','Times New Roman',serif;
-  font-size:clamp(13px,1.1vw,15px);
+  font-size:clamp(13px,1.15vw,15px);
   font-weight:400;
   line-height:1.9;
-  color:var(--vs-mistica);
+  color:rgba(0,0,0,.82);
   margin:0;
 }
 
@@ -319,12 +240,12 @@
   justify-content:space-between;
   align-items:baseline;
   gap:16px;
-  padding:12px 0;
-  border-bottom:1px solid var(--vs-bloque-borde);
+  padding:10px 0;
+  border-bottom:1px solid rgba(0,0,0,.08);
 }
 
 .mglx-versus__spec-fila:first-child{
-  border-top:1px solid var(--vs-bloque-borde);
+  border-top:1px solid rgba(0,0,0,.08);
 }
 
 .mglx-versus__spec-label{
@@ -333,7 +254,7 @@
   font-weight:400;
   letter-spacing:.4em;
   text-transform:uppercase;
-  color:var(--vs-spec-label);
+  color:rgba(0,0,0,.35);
   text-indent:.4em;
   flex-shrink:0;
 }
@@ -343,95 +264,32 @@
   font-size:clamp(9px,.88vw,11px);
   letter-spacing:.12em;
   text-transform:uppercase;
-  color:var(--vs-spec-valor);
+  color:rgba(0,0,0,.55);
   text-align:right;
 }
 
-.mglx-versus__tallas{
-  display:flex;
-  gap:6px;
-  flex-wrap:wrap;
-}
-
-.mglx-versus__talla{
-  cursor:pointer;
-}
-
-.mglx-versus__talla input[type="radio"]{
-  position:absolute;
-  appearance:none;
-  opacity:0;
-  width:0;
-  height:0;
-  pointer-events:none;
-}
-
-.mglx-versus__talla span{
-  display:block;
-  padding:10px 18px;
-  border:1px solid var(--vs-talla-borde);
-  font-family:system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
-  font-size:11px;
-  font-weight:600;
-  letter-spacing:.2em;
-  text-transform:uppercase;
-  color:var(--vs-texto);
-  cursor:pointer;
-  transition:background .12s,color .12s,border-color .12s;
-  text-indent:.2em;
-  user-select:none;
-}
-
-.mglx-versus__talla input[type="radio"]:checked + span{
-  background:var(--vs-texto);
-  color:var(--vs-fondo);
-  border-color:var(--vs-texto);
-}
-
-.mglx-versus__talla--agotada span{
-  opacity:.25;
-  cursor:not-allowed;
-  text-decoration:line-through;
-}
-
-.mglx-versus__boton-compra{
-  width:100%;
-  background:transparent;
-  border:1px solid var(--vs-texto);
-  color:var(--vs-texto);
+.mglx-versus__boton{
+  display:inline-block;
   font-family:'Cinzel','Times New Roman',serif;
-  font-size:clamp(9px,.9vw,11px);
+  font-size:clamp(8px,.85vw,10px);
   font-weight:700;
   letter-spacing:.5em;
   text-transform:uppercase;
-  padding:clamp(16px,2vh,22px) 0;
-  cursor:pointer;
+  color:#fff;
+  background:#000;
+  border:1px solid #000;
+  padding:clamp(14px,1.8vh,18px) clamp(24px,3vw,44px);
+  text-decoration:none;
+  text-indent:.5em;
   border-radius:0;
   transition:background .12s,color .12s;
-  text-indent:.5em;
+  margin-top:clamp(8px,1.5vh,16px);
+  align-self:flex-start;
 }
 
-.mglx-versus__boton-compra:hover{
-  background:var(--vs-boton-hover-fondo);
-  color:var(--vs-boton-hover-texto);
-}
-
-.mglx-versus__vacio{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  min-height:400px;
-  border:1px dashed var(--vs-talla-borde);
-}
-
-.mglx-versus__vacio-texto{
-  font-family:system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
-  font-size:11px;
-  letter-spacing:.25em;
-  text-transform:uppercase;
-  color:var(--vs-placeholder);
-  text-align:center;
-  text-indent:.25em;
+.mglx-versus__boton:hover{
+  background:transparent;
+  color:#000;
 }
 
 @media(min-width:990px){
@@ -441,83 +299,83 @@
   }
   .mglx-versus__panel--izquierda{
     border-bottom:none;
-    border-right:1px solid var(--vs-divisor);
+    border-right:1px solid rgba(0,0,0,.15);
   }
 }
 {% endstylesheet %}
 
 {% schema %}
 {
-  "name": "Versus — Drop",
+  "name": "Versus — Comparativa",
   "settings": [
     {
-      "type": "select",
-      "id": "color_scheme",
-      "label": "Esquema de Color",
-      "options": [
-        {"value": "dark", "label": "Oscuro Brutalista"},
-        {"value": "light", "label": "Editorial Claro"}
-      ],
-      "default": "dark"
-    },
-    {
       "type": "header",
-      "content": "Producto A — Izquierda"
+      "content": "Lado Izquierdo"
     },
     {
       "type": "product",
       "id": "producto_a",
-      "label": "Producto A"
+      "label": "Producto A (título y enlace dinámicos)"
     },
     {
       "type": "text",
-      "id": "etiqueta_a",
+      "id": "etiqueta_izquierda",
       "label": "Etiqueta",
       "default": "ARCHETYPO 01"
     },
     {
+      "type": "image_picker",
+      "id": "imagen_izquierda",
+      "label": "Imagen"
+    },
+    {
       "type": "textarea",
-      "id": "mistica_a",
-      "label": "Mística / Historia",
+      "id": "mistica_izquierda",
+      "label": "Mística / Significado",
       "default": "Construida para quienes entienden que la ropa no es decoración sino declaración. Cada costura es una cicatriz deliberada."
     },
     {
       "type": "text",
-      "id": "boton_a",
+      "id": "boton_texto_izquierda",
       "label": "Texto del Botón",
-      "default": "Adquirir Armadura"
+      "default": "Elegir Armadura"
     },
     {
       "type": "header",
-      "content": "Producto B — Derecha"
+      "content": "Lado Derecho"
     },
     {
       "type": "product",
       "id": "producto_b",
-      "label": "Producto B"
+      "label": "Producto B (título y enlace dinámicos)"
     },
     {
       "type": "text",
-      "id": "etiqueta_b",
+      "id": "etiqueta_derecha",
       "label": "Etiqueta",
       "default": "ARCHETYPO 02"
     },
     {
+      "type": "image_picker",
+      "id": "imagen_derecha",
+      "label": "Imagen"
+    },
+    {
       "type": "textarea",
-      "id": "mistica_b",
-      "label": "Mística / Historia",
+      "id": "mistica_derecha",
+      "label": "Mística / Significado",
       "default": "Para los que guardan silencio pero hablan con presencia. Un corte que convierte el cuerpo en santuario."
     },
     {
       "type": "text",
-      "id": "boton_b",
+      "id": "boton_texto_derecha",
       "label": "Texto del Botón",
-      "default": "Adquirir Armadura"
+      "default": "Elegir Armadura"
     }
   ],
   "presets": [
     {
-      "name": "Versus — Drop"
+      "name": "Versus — Comparativa"
     }
   ]
 }
