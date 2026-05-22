@@ -1,3 +1,12 @@
+{%- assign handle_lower = product.handle | downcase -%}
+{%- assign titulo_lower = product.title | downcase -%}
+{%- assign img_tallas = nil -%}
+{%- if handle_lower contains 'relicario' or titulo_lower contains 'relicario' or handle_lower contains 'reliquia-ii' or titulo_lower contains 'reliquia-ii' -%}
+  {%- assign img_tallas = section.settings.guia_tallas_relicario -%}
+{%- elsif handle_lower contains 'caballero' or titulo_lower contains 'caballero' or handle_lower contains 'reliquia-i' or titulo_lower contains 'reliquia-i' -%}
+  {%- assign img_tallas = section.settings.guia_tallas_caballero -%}
+{%- endif -%}
+
 <section class="mglx-info">
   <div class="mglx-info__contenedor">
 
@@ -8,14 +17,14 @@
       </summary>
       <div class="mglx-info__cuerpo">
         <p class="mglx-info__texto">Nuestras prendas están cortadas bajo un patrón Oversized Fit de autor (silueta relajada y hombros caídos). Te recomendamos elegir tu talla habitual para el fit diseñado por la marca.</p>
-        {% if section.settings.guia_tallas_img != blank %}
+        {% if img_tallas != blank %}
           <img
-            src="{{ section.settings.guia_tallas_img | image_url: width: 800 }}"
-            srcset="{{ section.settings.guia_tallas_img | image_url: width: 400 }} 400w, {{ section.settings.guia_tallas_img | image_url: width: 800 }} 800w"
+            src="{{ img_tallas | image_url: width: 800 }}"
+            srcset="{{ img_tallas | image_url: width: 400 }} 400w, {{ img_tallas | image_url: width: 800 }} 800w"
             sizes="(max-width:799px) calc(100vw - 48px), 752px"
-            width="{{ section.settings.guia_tallas_img.width }}"
-            height="{{ section.settings.guia_tallas_img.height }}"
-            alt="{{ section.settings.guia_tallas_img.alt | default: 'Guía de Tallas Magnoluxe' | escape }}"
+            width="{{ img_tallas.width }}"
+            height="{{ img_tallas.height }}"
+            alt="{{ img_tallas.alt | default: 'Guía de Tallas Magnoluxe' | escape }}"
             loading="lazy"
             class="mglx-info__imagen-tallas"
           >
@@ -161,8 +170,13 @@ details[open] .mglx-info__icono::after{
   "settings": [
     {
       "type": "image_picker",
-      "id": "guia_tallas_img",
-      "label": "Imagen Guía de Tallas"
+      "id": "guia_tallas_caballero",
+      "label": "Guía de Tallas — El Caballero"
+    },
+    {
+      "type": "image_picker",
+      "id": "guia_tallas_relicario",
+      "label": "Guía de Tallas — El Relicario"
     }
   ],
   "presets": [
