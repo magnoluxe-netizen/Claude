@@ -2,9 +2,9 @@
 {%- assign prod_b = section.settings.producto_b -%}
 
 <section class="mglx-versus">
-  <div class="mglx-versus__contenedor">
+  <div class="mglx-versus__arena">
 
-    <div class="mglx-versus__panel mglx-versus__panel--izquierda">
+    <div class="mglx-versus__panel">
       <div class="mglx-versus__cabecera">
         {% if section.settings.etiqueta_izquierda != blank %}
           <span class="mglx-versus__etiqueta">{{ section.settings.etiqueta_izquierda }}</span>
@@ -29,37 +29,29 @@
         {% endif %}
       </div>
 
-      <div class="mglx-versus__cuerpo">
-        {% if section.settings.mistica_izquierda != blank %}
-          <div class="mglx-versus__bloque">
-            <span class="mglx-versus__bloque-label">Mística</span>
-            <p class="mglx-versus__mistica">{{ section.settings.mistica_izquierda }}</p>
-          </div>
-        {% endif %}
-
-        <div class="mglx-versus__bloque">
-          <span class="mglx-versus__bloque-label">Especificaciones</span>
-          <div class="mglx-versus__specs">
-            <div class="mglx-versus__spec-fila">
-              <span class="mglx-versus__spec-label">Peso</span>
-              <span class="mglx-versus__spec-valor">320 gramos // Algodón Premium de Alto Gramaje</span>
-            </div>
-            <div class="mglx-versus__spec-fila">
-              <span class="mglx-versus__spec-label">Silueta</span>
-              <span class="mglx-versus__spec-valor">Oversized Fit // Patrón de Autor</span>
-            </div>
-            <div class="mglx-versus__spec-fila">
-              <span class="mglx-versus__spec-label">Confección</span>
-              <span class="mglx-versus__spec-valor">Cuello grueso anti-deformación y bordes de alta costura</span>
-            </div>
-          </div>
+      <div class="mglx-versus__grid">
+        <div class="mglx-versus__grid-fila">
+          <span class="mglx-versus__grid-label">Concepto</span>
+          <span class="mglx-versus__grid-valor">{{ section.settings.concepto_a | default: '—' }}</span>
         </div>
-
-        <a
-          class="mglx-versus__boton"
-          href="{% if prod_a %}{{ prod_a.url }}{% else %}#{% endif %}"
-        >{{ section.settings.boton_texto_izquierda | default: 'Elegir Armadura' }}</a>
+        <div class="mglx-versus__grid-fila">
+          <span class="mglx-versus__grid-label">Silueta</span>
+          <span class="mglx-versus__grid-valor">Oversized Estructurado</span>
+        </div>
+        <div class="mglx-versus__grid-fila">
+          <span class="mglx-versus__grid-label">Peso</span>
+          <span class="mglx-versus__grid-valor">320 Gramos Heavyweight</span>
+        </div>
+        <div class="mglx-versus__grid-fila">
+          <span class="mglx-versus__grid-label">Detalle</span>
+          <span class="mglx-versus__grid-valor">{{ section.settings.detalle_a | default: '—' }}</span>
+        </div>
       </div>
+
+      <a
+        class="mglx-versus__boton"
+        href="{% if prod_a %}{{ prod_a.url }}{% else %}#{% endif %}"
+      >{{ section.settings.boton_texto_izquierda | default: 'Adquirir Armadura' }}</a>
     </div>
 
     <div class="mglx-versus__panel mglx-versus__panel--derecha">
@@ -87,37 +79,29 @@
         {% endif %}
       </div>
 
-      <div class="mglx-versus__cuerpo">
-        {% if section.settings.mistica_derecha != blank %}
-          <div class="mglx-versus__bloque">
-            <span class="mglx-versus__bloque-label">Mística</span>
-            <p class="mglx-versus__mistica">{{ section.settings.mistica_derecha }}</p>
-          </div>
-        {% endif %}
-
-        <div class="mglx-versus__bloque">
-          <span class="mglx-versus__bloque-label">Especificaciones</span>
-          <div class="mglx-versus__specs">
-            <div class="mglx-versus__spec-fila">
-              <span class="mglx-versus__spec-label">Peso</span>
-              <span class="mglx-versus__spec-valor">320 gramos // Algodón Premium de Alto Gramaje</span>
-            </div>
-            <div class="mglx-versus__spec-fila">
-              <span class="mglx-versus__spec-label">Silueta</span>
-              <span class="mglx-versus__spec-valor">Oversized Fit // Patrón de Autor</span>
-            </div>
-            <div class="mglx-versus__spec-fila">
-              <span class="mglx-versus__spec-label">Confección</span>
-              <span class="mglx-versus__spec-valor">Cuello grueso anti-deformación y bordes de alta costura</span>
-            </div>
-          </div>
+      <div class="mglx-versus__grid">
+        <div class="mglx-versus__grid-fila">
+          <span class="mglx-versus__grid-label">Concepto</span>
+          <span class="mglx-versus__grid-valor">{{ section.settings.concepto_b | default: '—' }}</span>
         </div>
-
-        <a
-          class="mglx-versus__boton"
-          href="{% if prod_b %}{{ prod_b.url }}{% else %}#{% endif %}"
-        >{{ section.settings.boton_texto_derecha | default: 'Elegir Armadura' }}</a>
+        <div class="mglx-versus__grid-fila">
+          <span class="mglx-versus__grid-label">Silueta</span>
+          <span class="mglx-versus__grid-valor">Boxy Fit Relajado</span>
+        </div>
+        <div class="mglx-versus__grid-fila">
+          <span class="mglx-versus__grid-label">Peso</span>
+          <span class="mglx-versus__grid-valor">320 Gramos Heavyweight</span>
+        </div>
+        <div class="mglx-versus__grid-fila">
+          <span class="mglx-versus__grid-label">Detalle</span>
+          <span class="mglx-versus__grid-valor">{{ section.settings.detalle_b | default: '—' }}</span>
+        </div>
       </div>
+
+      <a
+        class="mglx-versus__boton"
+        href="{% if prod_b %}{{ prod_b.url }}{% else %}#{% endif %}"
+      >{{ section.settings.boton_texto_derecha | default: 'Adquirir Armadura' }}</a>
     </div>
 
   </div>
@@ -131,7 +115,7 @@
   width:100%;
 }
 
-.mglx-versus__contenedor{
+.mglx-versus__arena{
   display:flex;
   flex-direction:column;
 }
@@ -140,24 +124,25 @@
   flex:1;
   display:flex;
   flex-direction:column;
-  gap:clamp(28px,4.5vh,52px);
   padding:clamp(40px,6vw,88px) clamp(28px,4vw,68px);
+  border-bottom:1px solid rgba(0,0,0,.1);
 }
 
-.mglx-versus__panel--izquierda{
-  border-bottom:1px solid rgba(0,0,0,.15);
+.mglx-versus__panel--derecha{
+  border-bottom:none;
 }
 
 .mglx-versus__cabecera{
   display:flex;
   flex-direction:column;
-  gap:14px;
+  gap:12px;
+  margin-bottom:clamp(24px,3.5vh,40px);
 }
 
 .mglx-versus__etiqueta{
   font-family:system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
-  font-size:clamp(8px,.85vw,10px);
-  font-weight:700;
+  font-size:10px;
+  font-weight:800;
   letter-spacing:.3em;
   text-transform:uppercase;
   color:#000;
@@ -166,9 +151,9 @@
 
 .mglx-versus__titulo{
   font-family:'Cinzel','Times New Roman',serif;
-  font-size:clamp(30px,4.5vw,58px);
+  font-size:clamp(28px,4vw,54px);
   font-weight:900;
-  letter-spacing:.08em;
+  letter-spacing:.06em;
   text-transform:uppercase;
   color:#000;
   line-height:1.05;
@@ -178,7 +163,8 @@
 .mglx-versus__zona-imagen{
   aspect-ratio:2/3;
   overflow:hidden;
-  background:#f0f0f0;
+  background:#f5f5f5;
+  margin-bottom:clamp(24px,3.5vh,40px);
 }
 
 .mglx-versus__zona-imagen--vacia{
@@ -192,100 +178,62 @@
   display:block;
 }
 
-.mglx-versus__cuerpo{
+.mglx-versus__grid{
   display:flex;
   flex-direction:column;
-  gap:0;
+  flex:1;
 }
 
-.mglx-versus__bloque{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  padding:clamp(20px,3vh,32px) 0;
-  border-top:1px solid rgba(0,0,0,.1);
-}
-
-.mglx-versus__bloque:first-child{
-  border-top:none;
-  padding-top:0;
-}
-
-.mglx-versus__bloque-label{
-  font-family:system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
-  font-size:8px;
-  font-weight:700;
-  letter-spacing:.45em;
-  text-transform:uppercase;
-  color:#000;
-  text-indent:.45em;
-}
-
-.mglx-versus__mistica{
-  font-family:'Cinzel','Times New Roman',serif;
-  font-size:clamp(14px,1.2vw,16px);
-  font-weight:500;
-  line-height:1.9;
-  color:#000;
-  margin:0;
-}
-
-.mglx-versus__specs{
-  display:flex;
-  flex-direction:column;
-}
-
-.mglx-versus__spec-fila{
+.mglx-versus__grid-fila{
   display:flex;
   justify-content:space-between;
   align-items:baseline;
   gap:16px;
-  padding:10px 0;
-  border-bottom:1px solid rgba(0,0,0,.08);
+  padding:13px 0;
+  border-bottom:1px solid rgba(0,0,0,.1);
 }
 
-.mglx-versus__spec-fila:first-child{
-  border-top:1px solid rgba(0,0,0,.08);
+.mglx-versus__grid-fila:first-child{
+  border-top:1px solid rgba(0,0,0,.1);
 }
 
-.mglx-versus__spec-label{
+.mglx-versus__grid-label{
   font-family:system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
-  font-size:8px;
+  font-size:10px;
   font-weight:800;
-  letter-spacing:.4em;
+  letter-spacing:.2em;
   text-transform:uppercase;
   color:#000;
-  text-indent:.4em;
+  text-indent:.2em;
   flex-shrink:0;
 }
 
-.mglx-versus__spec-valor{
+.mglx-versus__grid-valor{
   font-family:system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
-  font-size:clamp(10px,.9vw,12px);
-  font-weight:700;
-  letter-spacing:.12em;
-  text-transform:uppercase;
+  font-size:clamp(11px,.95vw,13px);
+  font-weight:500;
+  letter-spacing:.04em;
   color:#000;
   text-align:right;
 }
 
 .mglx-versus__boton{
-  display:inline-block;
+  display:block;
   font-family:'Cinzel','Times New Roman',serif;
-  font-size:clamp(8px,.85vw,10px);
+  font-size:clamp(9px,.85vw,11px);
   font-weight:700;
   letter-spacing:.5em;
   text-transform:uppercase;
   color:#fff;
   background:#000;
   border:1px solid #000;
-  padding:clamp(14px,1.8vh,18px) clamp(24px,3vw,44px);
+  padding:clamp(16px,2vh,20px) 0;
   text-decoration:none;
   text-indent:.5em;
   border-radius:0;
+  text-align:center;
   transition:background .12s,color .12s;
-  margin-top:clamp(8px,1.5vh,16px);
-  align-self:flex-start;
+  margin-top:clamp(28px,4vh,48px);
 }
 
 .mglx-versus__boton:hover{
@@ -294,35 +242,38 @@
 }
 
 @media(min-width:990px){
-  .mglx-versus__contenedor{
+  .mglx-versus__arena{
     flex-direction:row;
     min-height:100svh;
   }
-  .mglx-versus__panel--izquierda{
+  .mglx-versus__panel{
     border-bottom:none;
-    border-right:1px solid rgba(0,0,0,.15);
+    border-right:1px solid rgba(0,0,0,.1);
+  }
+  .mglx-versus__panel--derecha{
+    border-right:none;
   }
 }
 {% endstylesheet %}
 
 {% schema %}
 {
-  "name": "Versus — Comparativa",
+  "name": "Versus — Drop",
   "settings": [
     {
       "type": "header",
-      "content": "Lado Izquierdo"
+      "content": "Columna Izquierda"
     },
     {
       "type": "product",
       "id": "producto_a",
-      "label": "Producto A (título y enlace dinámicos)"
+      "label": "Producto A"
     },
     {
       "type": "text",
       "id": "etiqueta_izquierda",
       "label": "Etiqueta",
-      "default": "ARCHETYPO 01"
+      "default": "RELIQUIA I"
     },
     {
       "type": "image_picker",
@@ -330,10 +281,16 @@
       "label": "Imagen"
     },
     {
-      "type": "textarea",
-      "id": "mistica_izquierda",
-      "label": "Mística / Significado",
-      "default": "Construida para quienes entienden que la ropa no es decoración sino declaración. Cada costura es una cicatriz deliberada."
+      "type": "text",
+      "id": "concepto_a",
+      "label": "Concepto",
+      "default": "La Armadura del Silencio"
+    },
+    {
+      "type": "text",
+      "id": "detalle_a",
+      "label": "Detalle Exclusivo",
+      "default": "Cuello Anti-deformación"
     },
     {
       "type": "text",
@@ -343,18 +300,18 @@
     },
     {
       "type": "header",
-      "content": "Lado Derecho"
+      "content": "Columna Derecha"
     },
     {
       "type": "product",
       "id": "producto_b",
-      "label": "Producto B (título y enlace dinámicos)"
+      "label": "Producto B"
     },
     {
       "type": "text",
       "id": "etiqueta_derecha",
       "label": "Etiqueta",
-      "default": "ARCHETYPO 02"
+      "default": "RELIQUIA II"
     },
     {
       "type": "image_picker",
@@ -362,10 +319,16 @@
       "label": "Imagen"
     },
     {
-      "type": "textarea",
-      "id": "mistica_derecha",
-      "label": "Mística / Significado",
-      "default": "Para los que guardan silencio pero hablan con presencia. Un corte que convierte el cuerpo en santuario."
+      "type": "text",
+      "id": "concepto_b",
+      "label": "Concepto",
+      "default": "El Santuario del Cuerpo"
+    },
+    {
+      "type": "text",
+      "id": "detalle_b",
+      "label": "Detalle Exclusivo",
+      "default": "Estampado Táctil Tacto Cero"
     },
     {
       "type": "text",
@@ -376,7 +339,7 @@
   ],
   "presets": [
     {
-      "name": "Versus — Comparativa"
+      "name": "Versus — Drop"
     }
   ]
 }
