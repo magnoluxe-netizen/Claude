@@ -2,9 +2,9 @@
 {%- assign prod_b = section.settings.producto_b -%}
 
 <section class="mglx-versus">
-  <div class="mglx-versus__arena">
+  <div class="mglx-versus__contenedor">
 
-    <div class="mglx-versus__panel">
+    <div class="mglx-versus__panel mglx-versus__panel--izquierda">
       <div class="mglx-versus__cabecera">
         {% if section.settings.etiqueta_izquierda != blank %}
           <span class="mglx-versus__etiqueta">{{ section.settings.etiqueta_izquierda }}</span>
@@ -36,7 +36,7 @@
         </div>
         <div class="mglx-versus__grid-fila">
           <span class="mglx-versus__grid-label">Silueta</span>
-          <span class="mglx-versus__grid-valor">Oversized Estructurado</span>
+          <span class="mglx-versus__grid-valor">Oversized de Autor</span>
         </div>
         <div class="mglx-versus__grid-fila">
           <span class="mglx-versus__grid-label">Peso</span>
@@ -115,7 +115,7 @@
   width:100%;
 }
 
-.mglx-versus__arena{
+.mglx-versus__contenedor{
   display:flex;
   flex-direction:column;
 }
@@ -125,17 +125,16 @@
   display:flex;
   flex-direction:column;
   padding:clamp(40px,6vw,88px) clamp(28px,4vw,68px);
-  border-bottom:1px solid rgba(0,0,0,.1);
 }
 
-.mglx-versus__panel--derecha{
-  border-bottom:none;
+.mglx-versus__panel--izquierda{
+  border-bottom:1px solid rgba(0,0,0,.1);
 }
 
 .mglx-versus__cabecera{
   display:flex;
   flex-direction:column;
-  gap:12px;
+  gap:14px;
   margin-bottom:clamp(24px,3.5vh,40px);
 }
 
@@ -151,9 +150,9 @@
 
 .mglx-versus__titulo{
   font-family:'Cinzel','Times New Roman',serif;
-  font-size:clamp(28px,4vw,54px);
+  font-size:clamp(30px,4.5vw,58px);
   font-weight:900;
-  letter-spacing:.06em;
+  letter-spacing:.08em;
   text-transform:uppercase;
   color:#000;
   line-height:1.05;
@@ -163,7 +162,7 @@
 .mglx-versus__zona-imagen{
   aspect-ratio:2/3;
   overflow:hidden;
-  background:#f5f5f5;
+  background:#f0f0f0;
   margin-bottom:clamp(24px,3.5vh,40px);
 }
 
@@ -201,10 +200,10 @@
   font-family:system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
   font-size:10px;
   font-weight:800;
-  letter-spacing:.2em;
+  letter-spacing:.25em;
   text-transform:uppercase;
   color:#000;
-  text-indent:.2em;
+  text-indent:.25em;
   flex-shrink:0;
 }
 
@@ -242,38 +241,35 @@
 }
 
 @media(min-width:990px){
-  .mglx-versus__arena{
+  .mglx-versus__contenedor{
     flex-direction:row;
     min-height:100svh;
   }
-  .mglx-versus__panel{
+  .mglx-versus__panel--izquierda{
     border-bottom:none;
     border-right:1px solid rgba(0,0,0,.1);
-  }
-  .mglx-versus__panel--derecha{
-    border-right:none;
   }
 }
 {% endstylesheet %}
 
 {% schema %}
 {
-  "name": "Versus — Drop",
+  "name": "Versus — Comparativa",
   "settings": [
     {
       "type": "header",
-      "content": "Columna Izquierda"
+      "content": "Lado Izquierdo"
     },
     {
       "type": "product",
       "id": "producto_a",
-      "label": "Producto A"
+      "label": "Producto A (título y enlace dinámicos)"
     },
     {
       "type": "text",
       "id": "etiqueta_izquierda",
       "label": "Etiqueta",
-      "default": "RELIQUIA I"
+      "default": "ARCHETYPO 01"
     },
     {
       "type": "image_picker",
@@ -290,7 +286,7 @@
       "type": "text",
       "id": "detalle_a",
       "label": "Detalle Exclusivo",
-      "default": "Cuello Anti-deformación"
+      "default": "Cuello Grueso Reforzado"
     },
     {
       "type": "text",
@@ -300,18 +296,18 @@
     },
     {
       "type": "header",
-      "content": "Columna Derecha"
+      "content": "Lado Derecho"
     },
     {
       "type": "product",
       "id": "producto_b",
-      "label": "Producto B"
+      "label": "Producto B (título y enlace dinámicos)"
     },
     {
       "type": "text",
       "id": "etiqueta_derecha",
       "label": "Etiqueta",
-      "default": "RELIQUIA II"
+      "default": "ARCHETYPO 02"
     },
     {
       "type": "image_picker",
@@ -339,7 +335,7 @@
   ],
   "presets": [
     {
-      "name": "Versus — Drop"
+      "name": "Versus — Comparativa"
     }
   ]
 }
