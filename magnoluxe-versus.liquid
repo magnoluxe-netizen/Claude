@@ -1,0 +1,342 @@
+{%- assign prod_a = section.settings.producto_a -%}
+{%- assign prod_b = section.settings.producto_b -%}
+
+<section class="mglx-versus">
+  <div class="mglx-versus__contenedor">
+
+    <div class="mglx-versus__panel mglx-versus__panel--izquierda">
+      <div class="mglx-versus__cabecera">
+        {% if section.settings.etiqueta_izquierda != blank %}
+          <span class="mglx-versus__etiqueta">{{ section.settings.etiqueta_izquierda }}</span>
+        {% endif %}
+        {% if prod_a %}
+          <h2 class="mglx-versus__titulo">{{ prod_a.title }}</h2>
+        {% endif %}
+      </div>
+
+      <div class="mglx-versus__zona-imagen{% if section.settings.imagen_izquierda == blank %} mglx-versus__zona-imagen--vacia{% endif %}">
+        {% if section.settings.imagen_izquierda != blank %}
+          <img
+            src="{{ section.settings.imagen_izquierda | image_url: width: 900 }}"
+            srcset="{{ section.settings.imagen_izquierda | image_url: width: 450 }} 450w, {{ section.settings.imagen_izquierda | image_url: width: 900 }} 900w, {{ section.settings.imagen_izquierda | image_url: width: 1400 }} 1400w"
+            sizes="(max-width:989px) 100vw, 50vw"
+            width="{{ section.settings.imagen_izquierda.width }}"
+            height="{{ section.settings.imagen_izquierda.height }}"
+            alt="{{ section.settings.imagen_izquierda.alt | default: section.settings.etiqueta_izquierda | escape }}"
+            loading="lazy"
+            class="mglx-versus__imagen"
+          >
+        {% endif %}
+      </div>
+
+      <div class="mglx-versus__grid">
+        <div class="mglx-versus__grid-fila">
+          <span class="mglx-versus__grid-label">Concepto</span>
+          <span class="mglx-versus__grid-valor">{{ section.settings.concepto_a | default: '—' }}</span>
+        </div>
+        <div class="mglx-versus__grid-fila">
+          <span class="mglx-versus__grid-label">Silueta</span>
+          <span class="mglx-versus__grid-valor">Oversized de Autor</span>
+        </div>
+        <div class="mglx-versus__grid-fila">
+          <span class="mglx-versus__grid-label">Peso</span>
+          <span class="mglx-versus__grid-valor">320 Gramos Heavyweight</span>
+        </div>
+        <div class="mglx-versus__grid-fila">
+          <span class="mglx-versus__grid-label">Detalle</span>
+          <span class="mglx-versus__grid-valor">{{ section.settings.detalle_a | default: '—' }}</span>
+        </div>
+      </div>
+
+      <a
+        class="mglx-versus__boton"
+        href="{% if prod_a %}{{ prod_a.url }}{% else %}#{% endif %}"
+      >{{ section.settings.boton_texto_izquierda | default: 'Adquirir Armadura' }}</a>
+    </div>
+
+    <div class="mglx-versus__panel mglx-versus__panel--derecha">
+      <div class="mglx-versus__cabecera">
+        {% if section.settings.etiqueta_derecha != blank %}
+          <span class="mglx-versus__etiqueta">{{ section.settings.etiqueta_derecha }}</span>
+        {% endif %}
+        {% if prod_b %}
+          <h2 class="mglx-versus__titulo">{{ prod_b.title }}</h2>
+        {% endif %}
+      </div>
+
+      <div class="mglx-versus__zona-imagen{% if section.settings.imagen_derecha == blank %} mglx-versus__zona-imagen--vacia{% endif %}">
+        {% if section.settings.imagen_derecha != blank %}
+          <img
+            src="{{ section.settings.imagen_derecha | image_url: width: 900 }}"
+            srcset="{{ section.settings.imagen_derecha | image_url: width: 450 }} 450w, {{ section.settings.imagen_derecha | image_url: width: 900 }} 900w, {{ section.settings.imagen_derecha | image_url: width: 1400 }} 1400w"
+            sizes="(max-width:989px) 100vw, 50vw"
+            width="{{ section.settings.imagen_derecha.width }}"
+            height="{{ section.settings.imagen_derecha.height }}"
+            alt="{{ section.settings.imagen_derecha.alt | default: section.settings.etiqueta_derecha | escape }}"
+            loading="lazy"
+            class="mglx-versus__imagen"
+          >
+        {% endif %}
+      </div>
+
+      <div class="mglx-versus__grid">
+        <div class="mglx-versus__grid-fila">
+          <span class="mglx-versus__grid-label">Concepto</span>
+          <span class="mglx-versus__grid-valor">{{ section.settings.concepto_b | default: '—' }}</span>
+        </div>
+        <div class="mglx-versus__grid-fila">
+          <span class="mglx-versus__grid-label">Silueta</span>
+          <span class="mglx-versus__grid-valor">Boxy Fit Relajado</span>
+        </div>
+        <div class="mglx-versus__grid-fila">
+          <span class="mglx-versus__grid-label">Peso</span>
+          <span class="mglx-versus__grid-valor">320 Gramos Heavyweight</span>
+        </div>
+        <div class="mglx-versus__grid-fila">
+          <span class="mglx-versus__grid-label">Detalle</span>
+          <span class="mglx-versus__grid-valor">{{ section.settings.detalle_b | default: '—' }}</span>
+        </div>
+      </div>
+
+      <a
+        class="mglx-versus__boton"
+        href="{% if prod_b %}{{ prod_b.url }}{% else %}#{% endif %}"
+      >{{ section.settings.boton_texto_derecha | default: 'Adquirir Armadura' }}</a>
+    </div>
+
+  </div>
+</section>
+
+{% stylesheet %}
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap');
+
+.mglx-versus{
+  background:#fff;
+  width:100%;
+}
+
+.mglx-versus__contenedor{
+  display:flex;
+  flex-direction:column;
+}
+
+.mglx-versus__panel{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  padding:clamp(40px,6vw,88px) clamp(28px,4vw,68px);
+}
+
+.mglx-versus__panel--izquierda{
+  border-bottom:1px solid rgba(0,0,0,.1);
+}
+
+.mglx-versus__cabecera{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  margin-bottom:clamp(24px,3.5vh,40px);
+}
+
+.mglx-versus__etiqueta{
+  font-family:system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:#000;
+  text-indent:.3em;
+}
+
+.mglx-versus__titulo{
+  font-family:'Cinzel','Times New Roman',serif;
+  font-size:clamp(30px,4.5vw,58px);
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:#000;
+  line-height:1.05;
+  margin:0;
+}
+
+.mglx-versus__zona-imagen{
+  aspect-ratio:2/3;
+  overflow:hidden;
+  background:#f0f0f0;
+  margin-bottom:clamp(24px,3.5vh,40px);
+}
+
+.mglx-versus__zona-imagen--vacia{
+  background:#f0f0f0;
+}
+
+.mglx-versus__imagen{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.mglx-versus__grid{
+  display:flex;
+  flex-direction:column;
+  flex:1;
+}
+
+.mglx-versus__grid-fila{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:16px;
+  padding:13px 0;
+  border-bottom:1px solid rgba(0,0,0,.1);
+}
+
+.mglx-versus__grid-fila:first-child{
+  border-top:1px solid rgba(0,0,0,.1);
+}
+
+.mglx-versus__grid-label{
+  font-family:system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  color:#000;
+  text-indent:.25em;
+  flex-shrink:0;
+}
+
+.mglx-versus__grid-valor{
+  font-family:system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
+  font-size:clamp(11px,.95vw,13px);
+  font-weight:500;
+  letter-spacing:.04em;
+  color:#000;
+  text-align:right;
+}
+
+.mglx-versus__boton{
+  display:block;
+  font-family:'Cinzel','Times New Roman',serif;
+  font-size:clamp(9px,.85vw,11px);
+  font-weight:700;
+  letter-spacing:.5em;
+  text-transform:uppercase;
+  color:#fff;
+  background:#000;
+  border:1px solid #000;
+  padding:clamp(16px,2vh,20px) 0;
+  text-decoration:none;
+  text-indent:.5em;
+  border-radius:0;
+  text-align:center;
+  transition:background .12s,color .12s;
+  margin-top:clamp(28px,4vh,48px);
+}
+
+.mglx-versus__boton:hover{
+  background:transparent;
+  color:#000;
+}
+
+@media(min-width:990px){
+  .mglx-versus__contenedor{
+    flex-direction:row;
+    min-height:100svh;
+  }
+  .mglx-versus__panel--izquierda{
+    border-bottom:none;
+    border-right:1px solid rgba(0,0,0,.1);
+  }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Versus — Comparativa",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Lado Izquierdo"
+    },
+    {
+      "type": "product",
+      "id": "producto_a",
+      "label": "Producto A (título y enlace dinámicos)"
+    },
+    {
+      "type": "text",
+      "id": "etiqueta_izquierda",
+      "label": "Etiqueta",
+      "default": "ARCHETYPO 01"
+    },
+    {
+      "type": "image_picker",
+      "id": "imagen_izquierda",
+      "label": "Imagen"
+    },
+    {
+      "type": "text",
+      "id": "concepto_a",
+      "label": "Concepto",
+      "default": "La Armadura del Silencio"
+    },
+    {
+      "type": "text",
+      "id": "detalle_a",
+      "label": "Detalle Exclusivo",
+      "default": "Cuello Grueso Reforzado"
+    },
+    {
+      "type": "text",
+      "id": "boton_texto_izquierda",
+      "label": "Texto del Botón",
+      "default": "Adquirir Armadura"
+    },
+    {
+      "type": "header",
+      "content": "Lado Derecho"
+    },
+    {
+      "type": "product",
+      "id": "producto_b",
+      "label": "Producto B (título y enlace dinámicos)"
+    },
+    {
+      "type": "text",
+      "id": "etiqueta_derecha",
+      "label": "Etiqueta",
+      "default": "ARCHETYPO 02"
+    },
+    {
+      "type": "image_picker",
+      "id": "imagen_derecha",
+      "label": "Imagen"
+    },
+    {
+      "type": "text",
+      "id": "concepto_b",
+      "label": "Concepto",
+      "default": "El Santuario del Cuerpo"
+    },
+    {
+      "type": "text",
+      "id": "detalle_b",
+      "label": "Detalle Exclusivo",
+      "default": "Estampado Táctil Tacto Cero"
+    },
+    {
+      "type": "text",
+      "id": "boton_texto_derecha",
+      "label": "Texto del Botón",
+      "default": "Adquirir Armadura"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Versus — Comparativa"
+    }
+  ]
+}
+{% endschema %}

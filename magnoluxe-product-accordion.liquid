@@ -1,0 +1,188 @@
+{%- assign handle_lower = product.handle | downcase -%}
+{%- assign titulo_lower = product.title | downcase -%}
+{%- assign img_tallas = nil -%}
+{%- if handle_lower contains 'relicario' or titulo_lower contains 'relicario' or handle_lower contains 'reliquia-ii' or titulo_lower contains 'reliquia-ii' -%}
+  {%- assign img_tallas = section.settings.guia_tallas_relicario -%}
+{%- elsif handle_lower contains 'caballero' or titulo_lower contains 'caballero' or handle_lower contains 'reliquia-i' or titulo_lower contains 'reliquia-i' -%}
+  {%- assign img_tallas = section.settings.guia_tallas_caballero -%}
+{%- endif -%}
+
+<section class="mglx-info">
+  <div class="mglx-info__contenedor">
+
+    <details class="mglx-info__item">
+      <summary class="mglx-info__cabecera">
+        <span class="mglx-info__titulo">Guía de Tallas (Oversized)</span>
+        <span class="mglx-info__icono" aria-hidden="true"></span>
+      </summary>
+      <div class="mglx-info__cuerpo">
+        <p class="mglx-info__texto">Nuestras prendas están cortadas bajo un patrón Oversized Fit de autor (silueta relajada y hombros caídos). Te recomendamos elegir tu talla habitual para el fit diseñado por la marca.</p>
+        {% if img_tallas != blank %}
+          <img
+            src="{{ img_tallas | image_url: width: 800 }}"
+            srcset="{{ img_tallas | image_url: width: 400 }} 400w, {{ img_tallas | image_url: width: 800 }} 800w"
+            sizes="(max-width:799px) calc(100vw - 48px), 752px"
+            width="{{ img_tallas.width }}"
+            height="{{ img_tallas.height }}"
+            alt="{{ img_tallas.alt | default: 'Guía de Tallas Magnoluxe' | escape }}"
+            loading="lazy"
+            class="mglx-info__imagen-tallas"
+          >
+        {% endif %}
+      </div>
+    </details>
+
+    <details class="mglx-info__item">
+      <summary class="mglx-info__cabecera">
+        <span class="mglx-info__titulo">Envíos y Despachos</span>
+        <span class="mglx-info__icono" aria-hidden="true"></span>
+      </summary>
+      <div class="mglx-info__cuerpo">
+        <p class="mglx-info__texto mglx-info__texto--protocolo">Protocolo de Despacho — Drop 01</p>
+        <p class="mglx-info__texto">Para asegurar la integridad y el estándar de exclusividad de cada entrega, hemos establecido un cronograma de envíos unificado.</p>
+        <p class="mglx-info__texto">La fase de despacho de todas las órdenes del Drop 01 se ejecutará la próxima semana. El tiempo estimado de entrega para todo el territorio de Colombia (incluyendo Bucaramanga y área metropolitana) es de 5 días hábiles a través de transportadora nacional segura.</p>
+      </div>
+    </details>
+
+  </div>
+</section>
+
+{% stylesheet %}
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap');
+
+.mglx-info{
+  background:#fff;
+  width:100%;
+  padding:clamp(32px,5vh,64px) 0;
+}
+
+.mglx-info__contenedor{
+  max-width:800px;
+  margin:0 auto;
+  padding:0 24px;
+}
+
+.mglx-info__item{
+  border-top:1px solid #000;
+}
+
+.mglx-info__item:last-child{
+  border-bottom:1px solid #000;
+}
+
+.mglx-info__cabecera{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:clamp(16px,2.5vh,22px) 0;
+  cursor:pointer;
+  list-style:none;
+  user-select:none;
+}
+
+.mglx-info__cabecera::-webkit-details-marker{
+  display:none;
+}
+
+.mglx-info__titulo{
+  font-family:'Cinzel','Times New Roman',serif;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  color:#000;
+  text-indent:.25em;
+}
+
+.mglx-info__icono{
+  position:relative;
+  width:14px;
+  height:14px;
+  flex-shrink:0;
+}
+
+.mglx-info__icono::before,
+.mglx-info__icono::after{
+  content:'';
+  position:absolute;
+  background:#000;
+  transition:transform .25s ease,opacity .25s ease;
+}
+
+.mglx-info__icono::before{
+  width:14px;
+  height:1px;
+  top:50%;
+  left:0;
+  transform:translateY(-50%);
+}
+
+.mglx-info__icono::after{
+  width:1px;
+  height:14px;
+  left:50%;
+  top:0;
+  transform:translateX(-50%);
+}
+
+details[open] .mglx-info__icono::after{
+  transform:translateX(-50%) scaleY(0);
+  opacity:0;
+}
+
+.mglx-info__cuerpo{
+  display:flex;
+  flex-direction:column;
+  gap:clamp(16px,2.5vh,24px);
+  padding-bottom:clamp(24px,3.5vh,40px);
+}
+
+.mglx-info__texto{
+  font-family:system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
+  font-size:clamp(13px,1.1vw,15px);
+  font-weight:500;
+  line-height:1.85;
+  color:#000;
+  margin:0;
+}
+
+.mglx-info__texto--protocolo{
+  font-family:'Cinzel','Times New Roman',serif;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  text-indent:.2em;
+}
+
+.mglx-info__imagen-tallas{
+  width:100%;
+  height:auto;
+  display:block;
+  object-fit:contain;
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "MGLX Info Modular",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "guia_tallas_caballero",
+      "label": "Guía de Tallas — El Caballero"
+    },
+    {
+      "type": "image_picker",
+      "id": "guia_tallas_relicario",
+      "label": "Guía de Tallas — El Relicario"
+    }
+  ],
+  "presets": [
+    {
+      "name": "MGLX Info Modular"
+    }
+  ]
+}
+{% endschema %}
