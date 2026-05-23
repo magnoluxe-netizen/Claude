@@ -1,0 +1,205 @@
+<section class="mglx-legacy">
+  <div class="mglx-legacy__contenedor">
+
+    <header class="mglx-legacy__cabecera">
+      <p class="mglx-legacy__titulo">El Legado // Archivo Histórico</p>
+    </header>
+
+    {% if section.blocks.size > 0 %}
+      <div class="mglx-legacy__grid">
+        {% for block in section.blocks %}
+          <div class="mglx-legacy__celda" {{ block.shopify_attributes }}>
+            {% if block.settings.imagen != blank %}
+              <div class="mglx-legacy__marco">
+                <img
+                  src="{{ block.settings.imagen | image_url: width: 800 }}"
+                  srcset="{{ block.settings.imagen | image_url: width: 400 }} 400w, {{ block.settings.imagen | image_url: width: 800 }} 800w, {{ block.settings.imagen | image_url: width: 1200 }} 1200w"
+                  sizes="(max-width:749px) 100vw, (max-width:989px) 50vw, 33vw"
+                  width="{{ block.settings.imagen.width }}"
+                  height="{{ block.settings.imagen.height }}"
+                  alt="{{ block.settings.imagen.alt | default: 'Magnoluxe Archivo' | escape }}"
+                  loading="lazy"
+                  class="mglx-legacy__imagen"
+                >
+                <div class="mglx-legacy__sello" aria-hidden="true">
+                  <span class="mglx-legacy__sello-principal">Agotado</span>
+                  <span class="mglx-legacy__sello-secundario">Sold Out</span>
+                </div>
+              </div>
+            {% else %}
+              <div class="mglx-legacy__marco mglx-legacy__marco--vacio"></div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+{% stylesheet %}
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap');
+
+.mglx-legacy{
+  background:#fff;
+  width:100%;
+  padding:clamp(48px,7vh,96px) 0;
+}
+
+.mglx-legacy__contenedor{
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 24px;
+  display:flex;
+  flex-direction:column;
+  gap:clamp(32px,5vh,56px);
+}
+
+.mglx-legacy__cabecera{
+  display:flex;
+  align-items:center;
+  gap:24px;
+}
+
+.mglx-legacy__cabecera::before,
+.mglx-legacy__cabecera::after{
+  content:'';
+  flex:1;
+  height:1px;
+  background:#000;
+  opacity:.15;
+}
+
+.mglx-legacy__titulo{
+  font-family:'Cinzel','Times New Roman',serif;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:#000;
+  text-indent:.3em;
+  white-space:nowrap;
+  margin:0;
+}
+
+.mglx-legacy__grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:clamp(12px,2vw,20px);
+}
+
+.mglx-legacy__celda{
+  position:relative;
+}
+
+.mglx-legacy__marco{
+  position:relative;
+  aspect-ratio:2/3;
+  overflow:hidden;
+  background:#f0f0f0;
+}
+
+.mglx-legacy__marco--vacio{
+  background:#f5f5f5;
+}
+
+.mglx-legacy__imagen{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  filter:grayscale(1);
+  transition:filter .5s ease;
+}
+
+.mglx-legacy__celda:hover .mglx-legacy__imagen{
+  filter:grayscale(0);
+}
+
+.mglx-legacy__sello{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  pointer-events:none;
+}
+
+.mglx-legacy__sello-principal{
+  font-family:system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
+  font-size:clamp(20px,3.5vw,40px);
+  font-weight:800;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.88);
+  text-indent:.18em;
+  text-shadow:0 1px 8px rgba(0,0,0,.45);
+  line-height:1;
+}
+
+.mglx-legacy__sello-secundario{
+  font-family:system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
+  font-size:clamp(9px,1.1vw,12px);
+  font-weight:600;
+  letter-spacing:.45em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.55);
+  text-indent:.45em;
+  text-shadow:0 1px 4px rgba(0,0,0,.4);
+}
+
+@media(min-width:749px){
+  .mglx-legacy__grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+  .mglx-legacy__celda:last-child:nth-child(odd){
+    grid-column:1 / -1;
+    max-width:calc(50% - 10px);
+  }
+}
+
+@media(min-width:990px){
+  .mglx-legacy__grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+  .mglx-legacy__celda:last-child:nth-child(odd){
+    grid-column:auto;
+    max-width:none;
+  }
+  .mglx-legacy__contenedor{
+    padding:0 clamp(24px,3vw,48px);
+  }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "MGLX Legado (Archivo)",
+  "blocks": [
+    {
+      "type": "pieza",
+      "name": "Pieza de Archivo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "imagen",
+          "label": "Imagen de la Prenda"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "MGLX Legado (Archivo)",
+      "blocks": [
+        {"type": "pieza"},
+        {"type": "pieza"},
+        {"type": "pieza"}
+      ]
+    }
+  ]
+}
+{% endschema %}
